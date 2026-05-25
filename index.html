@@ -148,6 +148,40 @@ body{font-family:"Outfit",sans-serif;background:var(--bg);color:var(--ink);min-h
 .cart-dot{background:var(--gold);color:#0a0806;width:21px;height:21px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px}
 .cart-cta{background:none;border:0.5px solid var(--gold2);color:var(--gold);padding:7px 14px;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;font-family:"Outfit",sans-serif;transition:all .2s}
 .cart-cta:hover{background:rgba(196,165,100,0.1)}
+
+/* COMMISSION PAGE */
+.commission-wrap{max-width:1040px;margin:0 auto;padding:3rem 2rem;display:none}
+.commission-wrap.visible{display:block;max-width:560px}
+.commission-left{}
+.commission-heading{font-family:"Cormorant Garamond",serif;font-size:40px;font-weight:300;line-height:1.15;margin-bottom:1rem}
+.commission-heading span{font-style:italic;color:var(--gold)}
+.commission-intro{font-size:13px;line-height:1.9;color:var(--muted);margin-bottom:2rem}
+.commission-sep{border:none;border-top:0.5px solid var(--border);margin:2rem 0}
+.commission-form{display:flex;flex-direction:column;gap:1.2rem}
+.form-group{display:flex;flex-direction:column;gap:0.5rem}
+.form-label{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted2)}
+.form-input,.form-select,.form-textarea{background:transparent;border:0.5px solid var(--border);color:var(--ink);font-family:"Outfit",sans-serif;font-size:13px;padding:12px 14px;outline:none;transition:border-color .25s;-webkit-appearance:none}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold2)}
+.form-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23686260'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.form-select option{background:#100f0d;color:var(--ink)}
+.form-textarea{resize:vertical;min-height:100px}
+.btn-submit{width:100%;padding:15px;background:transparent;border:0.5px solid var(--gold2);color:var(--gold);font-family:"Outfit",sans-serif;font-size:10px;letter-spacing:0.24em;text-transform:uppercase;cursor:pointer;transition:all .3s;margin-top:0.5rem}
+.btn-submit:hover{background:rgba(196,165,100,0.1);border-color:var(--gold)}
+.commission-right{position:sticky;top:2rem}
+.quote-box{border:0.5px solid var(--border);padding:2.5rem;display:none;flex-direction:column;gap:1.2rem}
+.quote-box.visible{display:flex}
+.quote-label{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold2)}
+.quote-title{font-family:"Cormorant Garamond",serif;font-size:26px;font-weight:300;line-height:1.25}
+.quote-line{display:flex;justify-content:space-between;align-items:baseline;border-top:0.5px solid var(--border);padding-top:1rem;font-size:12px;color:var(--muted);letter-spacing:0.05em}
+.quote-line strong{font-size:16px;color:var(--ink);font-weight:300}
+.quote-total{display:flex;justify-content:space-between;align-items:baseline;padding-top:1rem;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted2)}
+.quote-total strong{font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:300;color:var(--gold)}
+.quote-note{font-size:11px;color:var(--muted2);line-height:1.7;letter-spacing:0.03em}
+.btn-enquire{width:100%;padding:14px;background:var(--gold);color:#090807;font-family:"Outfit",sans-serif;font-size:10px;letter-spacing:0.24em;text-transform:uppercase;cursor:pointer;transition:all .3s;border:none;font-weight:400}
+.btn-enquire:hover{background:#d4b57e}
+@media(max-width:700px){
+
+}
 </style>
 </head>
 <body>
@@ -161,6 +195,7 @@ body{font-family:"Outfit",sans-serif;background:var(--bg);color:var(--ink);min-h
     <div class="nav-links">
       <button class="nav-link active" id="nav-works" onclick="showPage('works')">Works</button>
       <button class="nav-link" id="nav-about" onclick="showPage('about')">About</button>
+      <button class="nav-link" id="nav-commission" onclick="showPage('commission')">Commission</button>
     </div>
   </div>
 <svg class="nav-logo-mark" viewBox="0 0 120 48" width="120" height="48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -274,6 +309,84 @@ body{font-family:"Outfit",sans-serif;background:var(--bg);color:var(--ink);min-h
       </a>
     </div>
   </div>
+</div>
+
+
+<!-- COMMISSION PAGE -->
+<div class="commission-wrap" id="page-commission">
+  <div class="commission-left">
+    <div class="commission-heading">Commission a<br><span>new work</span></div>
+    <p class="commission-intro">Each piece is made by hand — painted, stitched, and finished over weeks. Tell me what you have in mind and I'll be in touch with a personal quote.</p>
+    <hr class="commission-sep">
+    <div class="commission-form" id="commission-form">
+
+      <div class="form-group">
+        <label class="form-label" for="c-name">First name *</label>
+        <input class="form-input" id="c-name" type="text" placeholder="Your first name" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="c-email">Email address *</label>
+        <input class="form-input" id="c-email" type="email" placeholder="your@email.com" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="c-subject">Subject or theme</label>
+        <input class="form-input" id="c-subject" type="text" placeholder="e.g. a toucan, a portrait, something abstract...">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="c-size">Approximate size</label>
+        <select class="form-select" id="c-size">
+          <option value="">— select —</option>
+          <option value="xs">Extra small — up to 20×20 cm</option>
+          <option value="small">Small — up to 30×30 cm</option>
+          <option value="small-rect">Small rectangle — up to 30×40 cm</option>
+          <option value="medium">Medium — up to 50×50 cm</option>
+          <option value="medium-rect">Medium rectangle — up to 50×70 cm</option>
+          <option value="large">Large — up to 80×80 cm</option>
+          <option value="large-rect">Large rectangle — up to 80×100 cm</option>
+          <option value="xlarge">Extra large — above 100 cm</option>
+          <option value="unsure">Not sure — open to suggestions</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="c-style">Style preference</label>
+        <select class="form-select" id="c-style">
+          <option value="">— select —</option>
+          <option value="figurative">Figurative / portrait</option>
+          <option value="nature">Nature / animal</option>
+          <option value="abstract">Abstract / geometric</option>
+          <option value="open">Open — surprise me</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="c-yarn">Include yarn or thread elements?</label>
+        <select class="form-select" id="c-yarn">
+          <option value="">— select —</option>
+          <option value="yes">Yes — I love the texture</option>
+          <option value="no">No — paint only</option>
+          <option value="unsure">Not sure, up to the artist</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="c-colours">Colour palette</label>
+        <input class="form-input" id="c-colours" type="text" placeholder="e.g. dark background, warm tones, blues and greens...">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="c-notes">Anything else</label>
+        <textarea class="form-textarea" id="c-notes" placeholder="A gift? A specific place in mind? A feeling you want it to carry?"></textarea>
+      </div>
+
+      <button class="btn-submit" onclick="sendCommission()">Send me a quote &rarr;</button>
+    </div>
+  </div>
+
+
 </div>
 
 <!-- MODAL -->
@@ -395,8 +508,10 @@ let cart = [];
 function showPage(page) {
   document.getElementById("page-works").style.display = page === "works" ? "block" : "none";
   document.getElementById("page-about").className = "about-wrap" + (page === "about" ? " visible" : "");
+  document.getElementById("page-commission").className = "commission-wrap" + (page === "commission" ? " visible" : "");
   document.getElementById("nav-works").classList.toggle("active", page === "works");
   document.getElementById("nav-about").classList.toggle("active", page === "about");
+  document.getElementById("nav-commission").classList.toggle("active", page === "commission");
 }
 
 function renderGrid(filter) {
@@ -515,6 +630,38 @@ document.querySelectorAll(".pill").forEach(function(b) {
 
 renderGrid("all");
 
+
+
+function sendCommission() {
+  const name = document.getElementById('c-name').value.trim();
+  const email = document.getElementById('c-email').value.trim();
+  const subject = document.getElementById('c-subject').value.trim();
+  const size = document.getElementById('c-size').value;
+  const style = document.getElementById('c-style').value;
+  const yarn = document.getElementById('c-yarn').value;
+  const colours = document.getElementById('c-colours').value.trim();
+  const notes = document.getElementById('c-notes').value.trim();
+
+  if (!name) { alert('Please enter your first name.'); document.getElementById('c-name').focus(); return; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); document.getElementById('c-email').focus(); return; }
+
+  const sizeLabels = { xs: 'Extra small — up to 20\u00d720 cm', small: 'Small — up to 30\u00d730 cm', 'small-rect': 'Small rectangle — up to 30\u00d740 cm', medium: 'Medium — up to 50\u00d750 cm', 'medium-rect': 'Medium rectangle — up to 50\u00d770 cm', large: 'Large — up to 80\u00d780 cm', 'large-rect': 'Large rectangle — up to 80\u00d7100 cm', xlarge: 'Extra large — above 100 cm', unsure: 'Not sure — open to suggestions' };
+  const styleLabels = { figurative: 'Figurative / portrait', nature: 'Nature / animal', abstract: 'Abstract / geometric', open: 'Open — surprise me' };
+  const yarnLabels = { yes: 'Yes', no: 'No — paint only', unsure: 'Up to the artist' };
+
+  const body = encodeURIComponent(
+    'Hi Kadri,\n\nI would love to commission a painting.\n\n' +
+    'Name: ' + name + '\n' +
+    'Email: ' + email + '\n\n' +
+    'Subject / theme: ' + (subject || '\u2014') + '\n' +
+    'Size: ' + (sizeLabels[size] || '\u2014') + '\n' +
+    'Style: ' + (styleLabels[style] || '\u2014') + '\n' +
+    'Yarn / thread elements: ' + (yarnLabels[yarn] || '\u2014') + '\n' +
+    'Colour palette: ' + (colours || '\u2014') + '\n' +
+    'Additional notes: ' + (notes || '\u2014')
+  );
+  window.location.href = 'mailto:kadrilaanes1@hotmail.com?subject=Commission request from ' + encodeURIComponent(name) + '&body=' + body;
+}
 
 </script>
 </body>
