@@ -46,9 +46,12 @@ body{font-family:"Outfit",sans-serif;background:var(--bg);color:var(--ink);min-h
 .card{cursor:pointer;position:relative}
 .card-span-4{grid-column:span 4}
 .card-span-5{grid-column:span 5}
-.card-span-7{grid-column:span 7}
 .card-span-6{grid-column:span 6}
+.card-span-7{grid-column:span 7}
+.card-span-8{grid-column:span 8}
 .card-span-3{grid-column:span 3}
+.card-span-12{grid-column:span 12}
+.card-center-6{grid-column:3 / 11}
 .card-index{font-family:"Cormorant Garamond",serif;font-size:11px;font-style:italic;color:var(--gold2);letter-spacing:0.1em;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.7rem}
 .card-index::after{content:"";flex:1;height:0.5px;background:var(--border)}
 .card-img{width:100%;overflow:hidden;position:relative;margin-bottom:1rem;background:var(--bg)}
@@ -70,7 +73,7 @@ body{font-family:"Outfit",sans-serif;background:var(--bg);color:var(--ink);min-h
 .card-price{font-size:13px;font-weight:300;letter-spacing:0.06em;color:var(--gold)}
 .sold-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted2)}
 @media(max-width:700px){
-  .card-span-4,.card-span-5,.card-span-7,.card-span-6,.card-span-3{grid-column:span 12}
+  .card-span-4,.card-span-5,.card-span-7,.card-span-6,.card-span-3,.card-span-8,.card-span-12,.card-center-6{grid-column:span 12}
   .nav-logo-mark{display:none}
   .hero-logo-mark{display:block}
   .nav-deco{display:none}
@@ -126,7 +129,7 @@ body{font-family:"Outfit",sans-serif;background:var(--bg);color:var(--ink);min-h
 .modal-body{padding:3rem 2.5rem;display:flex;flex-direction:column;gap:1.2rem;overflow-y:auto}
 .modal-year{font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold2);margin-bottom:2px}
 .modal-title{font-family:"Cormorant Garamond",serif;font-size:30px;font-weight:300;line-height:1.2}
-.modal-desc{font-size:13px;line-height:1.9;color:var(--muted);flex:1}
+.modal-desc{font-size:15px;line-height:2.2;color:var(--muted);flex:1;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;letter-spacing:0.02em}
 .modal-sep{border:none;border-top:0.5px solid var(--border)}
 .modal-dims{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted2)}
 .modal-price{font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:300;color:var(--gold)}
@@ -310,7 +313,7 @@ const P = [
     dims: "30 × 40 cm",
     price: "€49",
     category: "nature",
-    desc: "Luminous cactus pads rise against a night sky dense with hand-worked dots and waves. Orange and coral blooms ignite the darkness \u2014 a vision of the desert at its most alive. Tiny red yarn pompoms and fine stitching at the edges bring a tactile warmth to the surface.",
+    desc: "blooming at midnight<br>no one asked permission —<br>the desert decides",
     details: ["cactusD1"],
     sold: false,
   },
@@ -324,7 +327,7 @@ const P = [
     dims: "35 × 70 cm",
     price: "€299",
     category: "figurative",
-    desc: "An abstracted figure moves through ceremony. Every surface \u2014 skin, cloth, gesture \u2014 is rendered as a field of pattern: chevrons, spirals, dots and waves. Coiled yarn and stitched canvas edges add a tactile, sculptural dimension.",
+    desc: "every surface<br>a different prayer.<br>the souls remember.",
     details: ["figureD1", "figureD2"],
     sold: false,
   },
@@ -338,7 +341,7 @@ const P = [
     dims: "30 \u00d7 30 cm",
     price: "€29",
     category: "figurative",
-    desc: "A face emerges from black \u2014 its features drawn in a single white line. Golden hair radiates as patterned aureole. Pink mandala earrings frame a quietly commanding gaze.",
+    desc: "she wears the dark<br>like a second face.<br>gold does not apologise.",
     details: [],
     sold: false,
   },
@@ -352,7 +355,7 @@ const P = [
     dims: "40 × 50 cm",
     price: "€99",
     category: "nature",
-    desc: "A toucan perches in a jungle of chalk-white botanical drawings. The bird blazes with colour \u2014 yellow, cobalt, violet \u2014 against the dark textured ground. Meticulous and abundant.",
+    desc: "colour as argument.<br>the jungle keeps its silence<br>but the bird does not.",
     details: [],
     sold: false,
   },
@@ -366,7 +369,7 @@ const P = [
     dims: "50 × 50 cm",
     price: "€199",
     category: "abstract",
-    desc: "Interlocking circles \u2014 each a universe of micro-pattern \u2014 float in a deep dark field. Teal crochet edges and taut red and black threads stretched across the surface create a web of tension between painting and sculpture.",
+    desc: "every circle a world<br>with its own grammar —<br>none of them agree.",
     details: ["mandalaD1"],
     sold: false,
   },
@@ -380,7 +383,7 @@ const P = [
     dims: "80 × 60 cm",
     price: "€199",
     category: "figurative",
-    desc: "A serene figure rises from deep blue water. Shell-eyes, serpentine hair, a real pearl at her cheek. The background pulses with hand-worked wave patterns \u2014 somewhere between icon and dream.",
+    desc: "eyes closed,<br>she carries the tide inward.<br>the current knows her name.",
     details: [],
     sold: false,
   },
@@ -404,9 +407,10 @@ function renderGrid(filter) {
   g.innerHTML = "";
   list.forEach(function(p) {
     const card = document.createElement("div");
-    const spanMap = {"figure":"5","cactus":"4","portrait":"3","toucan":"3","mandalas":"5","mermaid":"4"};
+    const spanMap = {"figure":"5","cactus":"4","portrait":"3","toucan":"4","mandalas":"8","mermaid":"center-6"};
     const span = spanMap[p.id] || "4";
-    card.className = "card card-span-" + span;
+    const spanClass = span === "center-6" ? "card-center-6" : "card-span-" + span;
+    card.className = "card " + spanClass;
     const slides = [p.key].concat(p.details);
     const dotsHtml = slides.length > 1
       ? '<div class="slide-dots">' + slides.map(function(_,i) { return '<span class="dot' + (i===0?' active':'') + '"></span>'; }).join('') + '</div>'
