@@ -754,18 +754,44 @@ function sendCommission() {
   const styleLabels = { figurative: 'Figurative / portrait', nature: 'Nature / animal', abstract: 'Abstract / geometric', open: 'Open — surprise me' };
   const yarnLabels = { yes: 'Yes', no: 'No — paint only', unsure: 'Up to the artist' };
 
-  const body = encodeURIComponent(
-    'Hi Kadri,\n\nI would love to commission a painting.\n\n' +
-    'Name: ' + name + '\n' +
-    'Email: ' + email + '\n\n' +
-    'Subject / theme: ' + (subject || '\u2014') + '\n' +
-    'Size: ' + (sizeLabels[size] || '\u2014') + '\n' +
-    'Style: ' + (styleLabels[style] || '\u2014') + '\n' +
-    'Yarn / thread elements: ' + (yarnLabels[yarn] || '\u2014') + '\n' +
-    'Colour palette: ' + (colours || '\u2014') + '\n' +
-    'Additional notes: ' + (notes || '\u2014')
-  );
-  window.location.href = 'mailto:kadrilaanes1@hotmail.com?subject=Commission request from ' + encodeURIComponent(name) + '&body=' + body;
+  const btn = document.querySelector('.btn-submit');
+  btn.disabled = true;
+  btn.textContent = 'Sending\u2026';
+
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      access_key: 'f7a8d17a-7f04-4933-8980-eeedf8d0c663',
+      subject: 'Commission request from ' + name,
+      from_name: name,
+      replyto: email,
+      message:
+        'Name: ' + name + '\n' +
+        'Email: ' + email + '\n\n' +
+        'Subject / theme: ' + (subject || '\u2014') + '\n' +
+        'Size: ' + (sizeLabels[size] || '\u2014') + '\n' +
+        'Style: ' + (styleLabels[style] || '\u2014') + '\n' +
+        'Yarn / thread elements: ' + (yarnLabels[yarn] || '\u2014') + '\n' +
+        'Colour palette: ' + (colours || '\u2014') + '\n' +
+        'Additional notes: ' + (notes || '\u2014')
+    })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    if (data.success) {
+      btn.textContent = 'Sent \u2713';
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'Send me a quote \u2192';
+      alert('Something went wrong. Please try again.');
+    }
+  })
+  .catch(function() {
+    btn.disabled = false;
+    btn.textContent = 'Send me a quote \u2192';
+    alert('Could not send. Please check your connection and try again.');
+  });
 }
 
 </script>
