@@ -688,7 +688,7 @@ function openModal(id, trigger) {
       : p.stripeUrl && p.stripeUrl.indexOf('YOUR_') === -1
         ? '<a class="btn-cart" href="' + p.stripeUrl + '" target="_blank" rel="noopener" style="display:block;text-align:center;text-decoration:none;">Purchase &rarr;</a>'
         : '<button class="btn-cart" id="add-btn">Add to enquiry list</button>') +
-    '<div class="fine-print">Certificate of authenticity included<br>Free shipping within Europe &middot; Insured delivery</div>';
+    '';
   if (!p.sold && !(p.stripeUrl && p.stripeUrl.indexOf('YOUR_') === -1)) {
     const btn = document.getElementById("add-btn");
     if (btn) btn.addEventListener("click", function() { addCart(p.id); });
