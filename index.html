@@ -4,14 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Obskura Gallery</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Outfit:wght@200;300;400&display=swap" rel="stylesheet">
+<!-- Preconnect to font/icon origins -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+<!-- Preload woff2 files directly — bypasses googleapis.com redirect chain -->
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/cormorantgaramond/v22/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjornFLsS6V7w.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/cormorantgaramond/v22/co3YmX5slCNuHLi8bLeY9MK7whWMhyjQEl5fuhWz.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/cormorantgaramond/v22/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtKxy2oszstWbM.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/cormorantgaramond/v22/co3fmX5slCNuHLi8bLeY9MK7whWMhyjornFLgqXtKxA.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/outfit/v11/QGYvz_MVcBeNP4NjuGObqx1XmO1I4TC1C4G-EiAou6Y.woff2">
+
+<!-- Load Tabler Icons asynchronously (non-render-blocking) -->
+<link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"></noscript>
 
 <style>
+/* Self-hosted font faces — eliminates googleapis.com redirect chain */
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:300;font-display:swap;src:url('https://fonts.gstatic.com/s/cormorantgaramond/v22/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjornFLsS6V7w.woff2') format('woff2')}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:400;font-display:swap;src:url('https://fonts.gstatic.com/s/cormorantgaramond/v22/co3YmX5slCNuHLi8bLeY9MK7whWMhyjQEl5fuhWz.woff2') format('woff2')}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:300;font-display:swap;src:url('https://fonts.gstatic.com/s/cormorantgaramond/v22/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtKxy2oszstWbM.woff2') format('woff2')}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:400;font-display:swap;src:url('https://fonts.gstatic.com/s/cormorantgaramond/v22/co3fmX5slCNuHLi8bLeY9MK7whWMhyjornFLgqXtKxA.woff2') format('woff2')}
+@font-face{font-family:'Outfit';font-style:normal;font-weight:200 400;font-display:swap;src:url('https://fonts.gstatic.com/s/outfit/v11/QGYvz_MVcBeNP4NjuGObqx1XmO1I4TC1C4G-EiAou6Y.woff2') format('woff2')}
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#090807;--bg2:#100f0d;--ink:#f0ebe2;--muted:#878480;--muted2:#7d7775;--border:#1e1c1a;--gold:#c4a564;--gold2:#9a8555;}
 html{scroll-behavior:smooth}
-body{font-family:"Outfit",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden}
+body{font-family:"Outfit",system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden}
 
 /* NAV */
 .nav{display:flex;justify-content:space-between;align-items:center;padding:1.8rem 1.5rem;border-bottom:0.5px solid var(--border);max-width:1040px;margin:0 auto;position:relative}
@@ -613,8 +631,11 @@ function renderGrid(filter) {
     const arrowsHtml = slides.length > 1
       ? '<button class="slide-prev" aria-label="Previous">&#8249;</button><button class="slide-next" aria-label="Next">&#8250;</button>'
       : '';
+    const isFirstCard = list.indexOf(p) === 0;
     const imgsHtml = slides.map(function(k,i) {
-      return '<img src="' + IMG[k] + '" alt="' + p.title + '" loading="lazy" style="position:' + (i===0?'relative':'absolute') + ';' + (i>0?'inset:0;':'') + 'opacity:' + (i===0?1:0) + ';width:100%;height:100%;object-fit:' + (i===0?'cover':'contain') + ';background:var(--bg);">';
+      const isLCP = isFirstCard && i === 0;
+      const loadAttr = isLCP ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
+      return '<img src="' + IMG[k] + '" alt="' + p.title + '" ' + loadAttr + ' style="position:' + (i===0?'relative':'absolute') + ';' + (i>0?'inset:0;':'') + 'opacity:' + (i===0?1:0) + ';width:100%;height:100%;object-fit:' + (i===0?'cover':'contain') + ';background:var(--bg);">';
     }).join('');
     const globalIdx = P.indexOf(p);
     const romanNums = ["i","ii","iii","iv","v","vi","vii","viii","ix","x"];
