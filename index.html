@@ -6,7 +6,7 @@
 <title>Obskura Gallery</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Outfit:wght@200;300;400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#090807;--bg2:#100f0d;--ink:#f0ebe2;--muted:#878480;--muted2:#7d7775;--border:#1e1c1a;--gold:#c4a564;--gold2:#9a8555;}
@@ -319,7 +319,7 @@ body{font-family:"Outfit",sans-serif;background:var(--bg);color:var(--ink);min-h
     <div class="about-detail-label">Inquiries &amp; commissions</div>
     <div style="margin-top:0.5rem">
       <a class="contact-link" href="mailto:kadrilaanes1@hotmail.com">
-        <i class="ti ti-mail" aria-hidden="true"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
         kadrilaanes1@hotmail.com
       </a>
     </div>
@@ -701,8 +701,6 @@ function closeModal() {
 
 function addCart(id) {
   if (!cart.includes(id)) cart.push(id);
-  const b = document.getElementById("add-btn");
-  if (b) { b.textContent = "Added to enquiry list ✓"; b.classList.add("added"); b.disabled = true; }
   document.getElementById("cart-count").textContent = cart.length;
   document.getElementById("cart-float").classList.add("on");
 }
