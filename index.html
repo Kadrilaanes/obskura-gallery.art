@@ -6,7 +6,6 @@
 <title>Obskura Gallery</title>
 <!-- Preconnect to font/icon origins -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 
 <!-- Preload woff2 files directly — bypasses googleapis.com redirect chain -->
 <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/cormorantgaramond/v22/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjornFLsS6V7w.woff2">
@@ -15,9 +14,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/cormorantgaramond/v22/co3fmX5slCNuHLi8bLeY9MK7whWMhyjornFLgqXtKxA.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/outfit/v11/QGYvz_MVcBeNP4NjuGObqx1XmO1I4TC1C4G-EiAou6Y.woff2">
 
-<!-- Load Tabler Icons asynchronously (non-render-blocking) -->
-<link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"></noscript>
+
 
 <style>
 /* Self-hosted font faces — eliminates googleapis.com redirect chain */
@@ -631,7 +628,7 @@ function renderGrid(filter) {
     const arrowsHtml = slides.length > 1
       ? '<button class="slide-prev" aria-label="Previous">&#8249;</button><button class="slide-next" aria-label="Next">&#8250;</button>'
       : '';
-    const isFirstCard = list.indexOf(p) === 0;
+    const isFirstCard = p === P[0];
     const imgsHtml = slides.map(function(k,i) {
       const isLCP = isFirstCard && i === 0;
       const loadAttr = isLCP ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
