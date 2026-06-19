@@ -687,12 +687,9 @@ function openModal(id, trigger) {
     (p.sold ? '<button class="btn-cart" disabled>Sold</button>'
       : p.stripeUrl && p.stripeUrl.indexOf('YOUR_') === -1
         ? '<a class="btn-cart" href="' + p.stripeUrl + '" target="_blank" rel="noopener" style="display:block;text-align:center;text-decoration:none;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></a>'
-        : '<button class="btn-cart" id="add-btn">Add to enquiry list</button>') +
+        : '<button class="btn-cart" disabled>Sold</button>') +
     '';
-  if (!p.sold && !(p.stripeUrl && p.stripeUrl.indexOf('YOUR_') === -1)) {
-    const btn = document.getElementById("add-btn");
-    if (btn) btn.addEventListener("click", function() { addCart(p.id); });
-  }
+
   document.getElementById("overlay").classList.add("open");
   setTimeout(function() { document.getElementById("close-btn").focus(); }, 50);
 }
